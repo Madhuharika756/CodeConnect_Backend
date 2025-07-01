@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { trim } = require("validator");
 
 const userSchema = mongoose.Schema({
     "firstName":{
@@ -8,7 +9,9 @@ const userSchema = mongoose.Schema({
         type:String
     },
     "email":{
-        type :String
+        type :String,
+        unique:true,
+        trim:true
     },
     "age":{
         type:Number
