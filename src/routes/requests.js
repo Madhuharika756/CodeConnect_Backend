@@ -47,31 +47,40 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async(req,res)=>
     }
 })
 
-requestRouter.post("/request/review/:status/:requestId", userAuth, async(req,res)=>{
-    try{
-        const loggedInUser = req.user;
-        const {status, requestId} = req.params;
-        //validation1
-        const allowedStatus = ["accepted","rejected"];
-        if(!allowedStatus.includes(status)){
-            return res.status(400).json({message:"Status is Invalid!"});
-        }
-        //2
-        const connectionRequest = await ConnectionRequest.findOne({
-            _id:requestId,
-            toUserId:loggedInUser._id,
-            status:"interested"
-        })
-        if(!connectionRequest){
-            return res.status(400).send("Connection is not found!");
-        }
-        connectionRequest.status = status;
-        await connectionRequest.save();
-        res.send(loggedInUser.firstName+"! "+status+" the request!");
+requestRouter.post(
+  "/request/review/:status/:requestId",
+  userAuth,
+  async (req, res) => {
+    try {
+      const loggedInUser = req.user;
+      const { status, requestId } = req.params;
+
+      const allowedStatus = ["accepted", "rejected"];
+      if (!allowedStatus.includes(status)) {
+        return res.status(400).json({ messaage: "Status not allowed!" });
+      }
+
+      const connectionRequest = await ConnectionRequest.findOne({
+        _id: requestId,
+        toUserId: loggedInUser._id,
+        status: "interested",
+      });
+      if (!connectionRequest) {
+        return res
+          .status(404)
+          .json({ message: "Connection request not found" });
+      }
+
+      connectionRequest.status = status;
+
+      const data = await connectionRequest.save();
+
+      res.json({ message: "Connection request " + status, data });
+    } catch (err) {
+      res.status(400).send("ERROR: " + err.message);
     }
-    catch(err){
-        res.status(400).send("Error :"+err.message);
-    }
-})
+  }
+);
+
 
 module.exports ={requestRouter};
