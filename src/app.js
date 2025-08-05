@@ -24,6 +24,20 @@ app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
 
+// app.use("/userTesting",
+//     (req,res,next)=>{
+//         // res.send("Response 1");
+//         console.log("resopnse 1")
+//         next();
+//     },
+//     (req,res,next)=>{
+//         // res.send("Rsponse2");
+//         console.log("resopnse 2y")
+//         next();
+//     }
+// )
+
+
 
 // //Getting data
 // app.get("/user", async (req,res)=>{

@@ -24,6 +24,9 @@ profileRouter.patch("/updateProfile", userAuth, async(req,res)=>{
         const loggedInUser = req.user;;
         Object.keys(req.body).forEach(key=>{loggedInUser[key]=req.body[key]});
         console.log(loggedInUser);
+        if(loggedInUser?.skills.length>10){
+            throw new Error("Skills cant be more than 10");
+        }
         await loggedInUser.save();
         res.send(loggedInUser.firstName+"! your profile Upadted Successfully")
     }

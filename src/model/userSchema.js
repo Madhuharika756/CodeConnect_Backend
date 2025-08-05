@@ -10,16 +10,38 @@ const userSchema = mongoose.Schema({
     },
     "email":{
         type :String,
+        required:true,
         unique:true,
-        trim:true
+        trim:true,
+        lowercase:true
     },
     "age":{
         type:Number
     },
     "password":{
-        type:String
-    }
-})
+        type:String,
+        required:true
+    },
+    "gender":{
+        type:String,
+        validate(value){
+            if(!["male","female","others"].includes(value)){
+                throw new Error("Gender is Invalid")
+            }
+        }
+    },
+    "about":{
+        type:String,
+        default:"This is default About"
+    },
+    "photoUrl":{
+        type:String,
+        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfbpEYxFf0qqx_Mi0OVSQ1_zl1j27WwXd_4Q&s"
+    },
+    "skills":{
+        type:[String]
+    }},
+    { timestamps: true })
 
 const User = mongoose.model("user",userSchema);
 

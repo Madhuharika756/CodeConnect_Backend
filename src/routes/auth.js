@@ -11,12 +11,12 @@ authRouter.post("/signUp", async (req,res)=>{
     // console.log(req.body.email);
     try{
         validatingSignUpData(req);
-        const {firstName,lastName,email,password} = req.body;
+        const {firstName,lastName,email,password,photoUrl,gender,about,skills} = req.body;
         // const {firstName,lastName,email,password} = req.body;
     
         const passwordHash = await bcrypt.hash(password,10);
         // console.log(passwordHash);
-        const user = new User({firstName,lastName,email,password:passwordHash});
+        const user = new User({firstName,lastName,email,password:passwordHash,photoUrl,gender,about,skills});
         await user.save();
         res.send("Data is saved to Database!")
     }

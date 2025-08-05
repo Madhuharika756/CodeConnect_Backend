@@ -1,17 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
-
-const adminAuth= (req,res,next)=>{
-    const token = "xyz";
-    const isAuthorized = token ==="xyz";
-    if(!isAuthorized){
-        res.status(401).send("Unauhorized!!");
-    }
-    else{
-        next();
-    }
-}
-
 const userAuth = async (req,res,next)=>{
     try{
         const cookies = req.cookies;
