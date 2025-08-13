@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { trim } = require("validator");
+const validator =require("validator")
 
 const userSchema = mongoose.Schema({
     "firstName":{
@@ -36,7 +37,12 @@ const userSchema = mongoose.Schema({
     },
     "photoUrl":{
         type:String,
-        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfbpEYxFf0qqx_Mi0OVSQ1_zl1j27WwXd_4Q&s"
+        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfbpEYxFf0qqx_Mi0OVSQ1_zl1j27WwXd_4Q&s",
+        validate(value){
+            if(!validator.isURL(value)){
+                throw new Error("Ivalid Photo Url: "+value);
+            }
+        }
     },
     "skills":{
         type:[String]

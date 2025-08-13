@@ -11,12 +11,12 @@ authRouter.post("/signUp", async (req,res)=>{
     // console.log(req.body.email);
     try{
         validatingSignUpData(req);
-        const {firstName,lastName,email,password,photoUrl,gender,about,skills} = req.body;
+        const {firstName,lastName,email,password,photoUrl,gender,about,skills,age} = req.body;
         // const {firstName,lastName,email,password} = req.body;
     
         const passwordHash = await bcrypt.hash(password,10);
         // console.log(passwordHash);
-        const user = new User({firstName,lastName,email,password:passwordHash,photoUrl,gender,about,skills});
+        const user = new User({firstName,lastName,email,password:passwordHash,photoUrl,gender,about,skills,age});
         await user.save();
         res.send("Data is saved to Database!")
     }
@@ -40,7 +40,7 @@ authRouter.post("/login",async (req,res)=>{
             // console.log(token);
             //Add that token to the cookie to be sent to the user
             res.cookie("token",token);
-            res.send(user);
+            res.json({message:"login Successful!",user});
         }
         else{
             throw new Error("Invalid Credentials");

@@ -6,14 +6,17 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 //middleware have to be used to read josn and to conver it in to js object
-app.use(express.json());
-
 //middleware to prevent the cors error
-
+// app.options("*", cors(corsOptions));
 //middleware have to be used to read cookies
+app.use(express.json());
+app.use(cors({origin:"http://localhost:5173",
+     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials:true}));
 app.use(cookieParser());
-app.use(cors({origin:"http://localhost:5173",credentials:true}));
-
+app.use(cors({origin:"http://localhost:5173",
+     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials:true}));
 const {authRouter} = require("./routes/auth");
 const {profileRouter} = require("./routes/profile");
 const {requestRouter} = require("./routes/requests");
