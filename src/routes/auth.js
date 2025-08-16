@@ -36,7 +36,7 @@ authRouter.post("/login",async (req,res)=>{
         const isPasswordValid = await bcrypt.compare(password,user.password);
         if(isPasswordValid){
             //create a jwt toke
-            const token = jwt.sign({_id : user._id},"Dev@Tinder",{expiresIn:"1d"});
+            const token = jwt.sign({_id : user._id}, process.env.JWT_SECRET_KEY ,{expiresIn:"1d"});
             // console.log(token);
             //Add that token to the cookie to be sent to the user
             res.cookie("token",token);
