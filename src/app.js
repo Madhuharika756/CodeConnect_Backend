@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require('dotenv').config()
+const http = require("http");
 
 app.use(express.json());
 app.use(cors({
@@ -17,16 +18,19 @@ const { authRouter } = require("./routes/auth");
 const { profileRouter } = require("./routes/profile");
 const { requestRouter } = require("./routes/requests");
 const { userRouter } = require('./routes/user');
+const { intializeSocket } = require('./utils/socket');
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
+const server = http.createServer(app);
+intializeSocket(server);
 
 connectDb().then(() => {
     console.log("Database is connected successfully");
 
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
         console.log("App is listening at port number 1399");
     });
 }).
