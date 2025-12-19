@@ -1,7 +1,7 @@
 # 🛠️ CodeConnect – Backend
 
 CodeConnect Backend is the **server-side application** that powers the CodeConnect platform.  
-It handles  logic, API requests, authentication, and database management.
+It handles business logic, API requests, authentication, and database management.
 
 ---
 
@@ -43,7 +43,7 @@ It handles  logic, API requests, authentication, and database management.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/codeconnect-backend.git
+git clone https://github.com/Madhuharika756/CodeConnect_Backend.git
 
 # Navigate to project folder
 cd codeconnect-backend
@@ -52,7 +52,7 @@ cd codeconnect-backend
 npm install
 
 # Create a .env file in the root directory and add:
-PORT=5000
+PORT=1399
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
