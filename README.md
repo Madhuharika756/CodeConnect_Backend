@@ -7,12 +7,12 @@ It handles  logic, API requests, authentication, and database management.
 
 ## 🚀 Features
 
-- 🔐 User authentication & authorization  
-- 📡 RESTful API endpoints  
-- 🗄️ MongoDB database integration  
-- 🔄 CRUD operations  
-- 🧠 Server-side validation  
-- 🌐 CORS-enabled API for frontend integration  
+-  User authentication & authorization  
+-  RESTful API endpoints  
+-  MongoDB database integration  
+-  CRUD operations  
+-  Server-side validation  
+-  CORS-enabled API for frontend integration  
 
 ---
 
