@@ -17,14 +17,14 @@ const intializeSocket = (server) => {
   io.on("connection", (socket) => {
     console.log("Socket connected:", socket.id);
 
-    // ✅ JOIN CHAT
+    //  JOIN CHAT
     socket.on("joinChat", ({ userId, targetUserId }) => {
       const roomId = getSecretRoomId(userId, targetUserId);
       socket.join(roomId);
       console.log(`${userId} joined room ${roomId}`);
     });
 
-    // ✅ SEND MESSAGE (SAVE + EMIT)
+    // SEND MESSAGE (SAVE + EMIT)
     socket.on("sendMessage", async ({ userId, targetUserId, message }) => {
       try {
         const roomId = getSecretRoomId(userId, targetUserId);

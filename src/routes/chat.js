@@ -1,14 +1,12 @@
 const express = require("express");
-require("../model/userSchema"); // ✅ MUST BE HERE
+require("../model/userSchema"); 
 const { Chat } = require("../model/chatSchema");
 const { userAuth } = require("../middleware/auth");
 
 
 const chatRouter = express.Router();
+// GET chat between logged-in user & target user
 
-/**
- * GET chat between logged-in user & target user
- */
 chatRouter.get("/chat/:targetUserId", userAuth, async (req, res) => {
   try {
     const loggedInUserId = req.user._id;

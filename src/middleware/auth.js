@@ -23,7 +23,6 @@ const userAuth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (err) {
-        // 🔑 IMPORTANT FIX: return 401, NOT 400
         return res.status(401).send("Unauthorized");
     }
 };
